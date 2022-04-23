@@ -11,12 +11,15 @@ TEMP_DIR = Path(gettempdir())
 class Settings(BaseSettings):
     """Application settings."""
 
+    secret_key: str
+    access_token_expire_minutes: int = 60 * 24 * 30  # 30 days
+    encryption_algorithm: str = "HS256"
     host: str = "127.0.0.1"
     port: int = 8000
     # quantity of workers for uvicorn
     workers_count: int = 1
     # Enable uvicorn reloading
-    reload: bool = False
+    reload: bool = True
     db_host: str = "localhost"
     db_port: int = 5432
     db_user: str = "backend"
