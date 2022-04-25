@@ -34,7 +34,6 @@ class UserUpdate(UserBase):
     is_reported: Optional[bool] = None
     is_blocked: Optional[bool] = None
     preferences: Optional[str] = None
-    updated_at: Optional[datetime] = None
 
 
 class UserInDBBase(UserBase):

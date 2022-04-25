@@ -71,6 +71,7 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_prefix = "BACKEND_"
         env_file_encoding = "utf-8"
+        case_sensitive = False
 
 
 settings = Settings()

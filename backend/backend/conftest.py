@@ -7,7 +7,7 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-from backend.db.dependencies import get_db_session
+from backend.db.dependencies.db import get_db_session
 from backend.db.utils import create_database, drop_database
 from backend.services.redis.dependency import get_redis_connection
 from backend.settings import settings
