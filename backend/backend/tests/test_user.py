@@ -12,8 +12,6 @@ from backend.tests.utils import (
 )
 from backend.web.api.auth.schema import Token
 
-# TODO: Fix strange SQLAlchemy error
-
 
 @pytest.mark.anyio
 async def test_create_user_success(

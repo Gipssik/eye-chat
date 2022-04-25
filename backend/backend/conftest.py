@@ -45,7 +45,6 @@ async def _engine() -> AsyncGenerator[AsyncEngine, None]:
     try:
         yield engine
     finally:
-        await engine.dispose()
         await drop_database()
 
 
@@ -62,22 +61,17 @@ async def dbsession(
     :param _engine: current engine.
     :yields: async session.
     """
-    connection = await _engine.connect()
-    trans = await connection.begin()
 
-    session_maker = sessionmaker(
-        connection,
+    async_session = sessionmaker(
+        _engine,
         expire_on_commit=False,
         class_=AsyncSession,
     )
-    session = session_maker()
-
-    try:
-        yield session
-    finally:
-        await session.close()
-        await trans.rollback()
-        await connection.close()
+    async with _engine.begin() as connection:
+        async with async_session(bind=connection) as session:
+            yield session
+            await session.flush()
+            await session.rollback()
 
 
 @pytest.fixture

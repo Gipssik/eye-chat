@@ -11,7 +11,6 @@ TEMP_DIR = Path(gettempdir())
 class Settings(BaseSettings):
     """Application settings."""
 
-    secret_key: str
     access_token_expire_minutes: int = 60 * 24 * 30  # 30 days
     encryption_algorithm: str = "HS256"
     host: str = "127.0.0.1"
@@ -31,6 +30,9 @@ class Settings(BaseSettings):
     redis_user: Optional[str] = None
     redis_pass: Optional[str] = None
     redis_base: Optional[int] = None
+
+    # Variables from environment
+    secret_key: Optional[str] = None
 
     @property
     def db_url(self) -> URL:
