@@ -2,6 +2,7 @@ from importlib import metadata
 
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from backend.web.api.router import api_router
 from backend.web.lifetime import shutdown, startup
@@ -29,5 +30,12 @@ def get_app() -> FastAPI:
     app.on_event("shutdown")(shutdown(app))
 
     app.include_router(router=api_router, prefix="/api")
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     return app
