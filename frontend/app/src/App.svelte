@@ -1,19 +1,21 @@
-<script>
-  import { onMount } from "svelte";
-  import { Router } from "@roxi/routify";
-  import { routes } from "../.routify/routes";
-  import { instance } from "./Instance"
-  import { user } from "./stores";
+<script lang="ts">
+    import { onMount } from "svelte";
+    import { metatags, Router } from "@roxi/routify";
+    import { routes } from "../.routify/routes";
+    import { user } from "./stores";
+    import { UsersService } from "./client";
 
-  onMount(() => {
-    instance.get('users/me')
-    .then(response => {
-      user.set(response.data);
+    metatags.description = 'A messanger for your eyes.';
+
+    onMount(() => {
+        UsersService.getUserMeApiUsersMeGet()
+            .then(response => {
+                user.set(response);
+            })
+            .catch(error => {
+                user.set(null);
+            });
     })
-    .catch(error => {
-      user.set(null);
-    });
-  })
 </script>
 
 <Router {routes} />

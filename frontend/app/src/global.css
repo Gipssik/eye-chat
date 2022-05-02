@@ -13,6 +13,11 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 10px;
+}
+
 a {
 	color: rgb(0,100,200);
 	text-decoration: none;
@@ -63,4 +68,76 @@ button:disabled {
 
 button:focus {
 	border-color: #666;
+}
+
+.form-container{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+}
+
+.form-container > div{
+	height: fit-content;
+	width: 25vw;
+	min-width: 350px;
+	background-color: #2f8b62;
+	border-radius: 5px;
+	padding: 40px 10px;
+	z-index: 1;
+	mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.95));
+	mask-size: 100%;
+	mask-repeat: no-repeat;
+	-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.95));
+	-webkit-mask-size: 100%;
+	-webkit-mask-repeat: no-repeat;
+}
+
+.form-container h1{
+	color: #fff;
+	text-align: center;
+	font-size: 35px;
+}
+
+.form-container section{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.form-container .bottom-block{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+}
+
+.form-container .bottom-block > sub{
+	color: #d4d4d4;
+}
+
+.form-container .bottom-block > sub > span{
+	text-decoration: underline;
+	font-style: italic;
+	color: #e6e6e6;
+	cursor: pointer;
+}
+
+.form-container .bottom-block > sub > span:hover{
+	color: #fff;
+}
+
+.form-input{
+	width: 80%;
+	min-width: 300px;
+}
+
+.form-button{
+	width: 150px;
+	height: 50px;
 }

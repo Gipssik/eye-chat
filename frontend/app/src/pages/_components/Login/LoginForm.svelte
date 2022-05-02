@@ -1,18 +1,29 @@
-<script>
+<script lang="ts">
     import { form, field } from 'svelte-forms';
     import { required } from 'svelte-forms/validators';
     import Textfield from '@smui/textfield';
     import Button, { Label } from '@smui/button';
+    import type { Field } from 'svelte-forms/types';
+    import type { IForm } from '../../../types';
+    import { goto } from '@roxi/routify';
 
-    export let proccessAuthentication;
+    export let processAuthentication: (
+        loginForm: IForm,
+        username: Field<string>,
+        password: Field<string>
+    ) => void;
 
     const username = field('username', '', [required()]);
     const password = field('password', '', [required()]);
     const loginForm = form(username, password);
 
-    const handleKeyPress = (e) => {
+    const callProcessing = () => {
+        processAuthentication($loginForm, $username, $password);
+    }
+
+    const handleKeyPress = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
-            proccessAuthentication($loginForm, $username, $password);
+            callProcessing();
         }
     };
 </script>
@@ -20,14 +31,14 @@
 
 <section on:keypress={handleKeyPress}>
     <Textfield
-        class='login-input'
+        class='form-input'
         type="text"
         variant="outlined"
         required={true}
         bind:value={$username.value} label="Username"
     />
-    <Textfield 
-        class='login-input'
+    <Textfield
+        class='form-input'
         type="password"
         variant="outlined"
         required={true}
@@ -35,32 +46,15 @@
         label="Password"
     />
 
-    <Button 
-        class="login-button"
-        variant="outlined"
-        on:click={() => proccessAuthentication($loginForm, $username, $password)}
-    >
-        <Label>Login</Label>
-    </Button>
+    <div class="bottom-block">
+        <Button
+            class="form-button"
+            variant="outlined"
+            on:click={callProcessing}
+        >
+            <Label>Login</Label>
+        </Button>
+        <sub>Don't have an account? Sign up <span on:click={() => $goto("/register")}>here</span></sub>
+    </div>
+
 </section>
-
-
-<style>
-    section{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-    }
-
-    :global(.login-input){
-        width: 80%;
-        min-width: 300px;
-    }
-
-    :global(.login-button){
-        width: 150px;
-        height: 50px;
-    }
-</style>

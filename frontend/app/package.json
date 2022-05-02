@@ -9,7 +9,8 @@
         "preview": "vite preview",
         "build": "run-s build:*",
         "build:routify": "routify -b",
-        "build:vite": "vite build"
+        "build:vite": "vite build",
+        "generate-client": "openapi --input http://localhost:8000/api/openapi.json --output ./src/client --client axios"
     },
     "devDependencies": {
         "@roxi/routify": "^2.18.4",
@@ -18,7 +19,9 @@
         "@smui/textfield": "^6.0.0-beta.16",
         "@sveltejs/vite-plugin-svelte": "^1.0.0-next.34",
         "autoprefixer": "^10.4.2",
+        "form-data": "^4.0.0",
         "npm-run-all": "^4.1.5",
+        "openapi-typescript-codegen": "^0.22.0",
         "postcss": "^8.4.5",
         "postcss-import": "^14.0.2",
         "smui-theme": "^6.0.0-beta.16",
